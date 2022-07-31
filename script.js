@@ -3,6 +3,22 @@ var beginButton = document.getElementById("begin-button");
 beginButton.addEventListener("click", function(event){
     event.preventDefault();
 
+    var timeClassEl = document.querySelector(".timer");
+    var secondsLeft = 60;
+    
+    function setTime() {
+        var timerInterval = setInterval(function () {
+            secondsLeft--;
+            timeClassEl.textContent = "Time: " + secondsLeft + " seconds left"
+
+            if(secondsLeft === 0) {
+                clearInterval(timerInterval);
+            }
+        }, 1000);
+    }
+
+    setTime();
+
     var removeText = document.getElementById("instructions-box");
     removeText.remove();
     var removeButton = document.getElementById("begin-button");
@@ -105,4 +121,17 @@ beginButton.addEventListener("click", function(event){
             })};       
         })};
     })};
+
+
 });
+
+var timeClassEl = document.querySelector(".timer");
+var timeIdEl = document.getElementById("timer");
+var secondsLeft = 60;
+
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeClassEl.textContent = "Time: " + secondsLeft + " seconds left"
+    }, 1000)
+}
