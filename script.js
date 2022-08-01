@@ -11,6 +11,7 @@ var optionThree = document.createElement("button");
 var optionFourText = document.createTextNode("4. Numbers");
 var optionFour = document.createElement("button");
 var secondsLeft = 60;
+var timerInterval;
 
 function wrongAnswerClicked() {
     wrongAnswer = document.querySelectorAll(".wrong-answer");
@@ -68,9 +69,9 @@ function wrongAnswerClicked5() {
     console.log("wrong answer clicked is called5", wrongAnswer, rightAnswer);
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
-        wrongAnswer[x].addEventListener("click", fifthQuestion);
+        wrongAnswer[x].addEventListener("click", gameOver);
     }; 
-    rightAnswer.addEventListener("click", fifthQuestion);
+    rightAnswer.addEventListener("click", gameOver);
 }
 
 
@@ -113,11 +114,12 @@ function resetListener4 () {
 var timeClassEl = document.querySelector(".timer");
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+        timerInterval = setInterval(function () {
         secondsLeft--;
         timeClassEl.textContent = "Time: " + secondsLeft + " seconds left"
 
         if(secondsLeft === 0) {
+            gameOver();
             clearInterval(timerInterval);
         }
     }, 1000);
@@ -249,4 +251,15 @@ function fifthQuestion () {
                     optionFour.classList.replace("wrong-answer", "right-answer");
 
                     wrongAnswerClicked5();
-};        
+};
+
+function gameOver () {
+    clearInterval(timerInterval);
+    var finalScore = secondsLeft;
+    timeClassEl.textContent = "Time: " + finalScore + " seconds left"
+    firstQuestionDivText.textContent = "GAME OVER! Your final score is " + finalScore + "!";
+    var removeAnswerOptions = document.querySelectorAll(".optionButton5");
+    for (var i = 0; i < removeAnswerOptions.length; i++) {
+        removeAnswerOptions[i].remove();
+    }
+};
