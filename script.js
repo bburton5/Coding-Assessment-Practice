@@ -11,13 +11,6 @@ var optionThree = document.createElement("button");
 var optionFourText = document.createTextNode("4. Numbers");
 var optionFour = document.createElement("button");
 var secondsLeft = 60;
-var arrayOfFunctions = [
-    secondQuestion,
-    thirdQuestion,
-    fourthQuestion,
-    fifthQuestion,
-]
-var keepTrack = 0;
 
 function wrongAnswerClicked() {
     wrongAnswer = document.querySelectorAll(".wrong-answer");
@@ -39,11 +32,12 @@ function wrongAnswerClicked2() {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", thirdQuestion);
     }; 
+    console.log(secondsLeft);
     rightAnswer.addEventListener("click", thirdQuestion);
 }; 
 
 function wrongAnswerClicked3() {
-    resetListener();
+    resetListener2();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
     console.log("wrong answer clicked is called3", wrongAnswer, rightAnswer);
@@ -51,11 +45,12 @@ function wrongAnswerClicked3() {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", fourthQuestion);
     }; 
+    console.log(secondsLeft);
     rightAnswer.addEventListener("click", fourthQuestion);
 }
 
 function wrongAnswerClicked4() {
-    resetListener();
+    resetListener3();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
     console.log("wrong answer clicked is called4", wrongAnswer, rightAnswer);
@@ -67,7 +62,7 @@ function wrongAnswerClicked4() {
 }
 
 function wrongAnswerClicked5() {
-    resetListener();
+    resetListener4();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
     console.log("wrong answer clicked is called5", wrongAnswer, rightAnswer);
@@ -78,42 +73,64 @@ function wrongAnswerClicked5() {
     rightAnswer.addEventListener("click", fifthQuestion);
 }
 
-function togglePages () {
-  for (var a = 0; a <= arrayOfFunctions.length; a++) {
-
-  }  
-}
 
 function resetListener () {
-    if (wrongAnswer.length > 0) {
-        for (var x = 0; x < wrongAnswer.length; x++) {
-        wrongAnswer[x].removeEventListener("click", subtractTenSeconds, {once : true});
-        };
-    } else {
-        return;
-    };       
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].removeEventListener("click", secondQuestion);
+    };
+    rightAnswer.removeEventListener("click", secondQuestion);
+    console.log("reset");   
 }
 
+function resetListener2 () {
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].removeEventListener("click", thirdQuestion);
+    };
+    rightAnswer.removeEventListener("click", thirdQuestion);
+    console.log("reset");   
+}
+
+function resetListener3 () {
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].removeEventListener("click", fourthQuestion);
+    };
+    rightAnswer.removeEventListener("click", fourthQuestion);
+    console.log("reset");   
+}
+
+function resetListener4 () {
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].removeEventListener("click", fifthQuestion);
+    };
+    rightAnswer.removeEventListener("click", fifthQuestion);
+    console.log("reset");   
+}
+
+var timeClassEl = document.querySelector(".timer");
+
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeClassEl.textContent = "Time: " + secondsLeft + " seconds left"
+
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+};
+
 function subtractTenSeconds () {
+    console.log("subtr");
     secondsLeft = secondsLeft - 10;
+    console.log(secondsLeft);
 }
 
 beginButton.addEventListener("click", function(event){
     event.preventDefault();
-
-    var timeClassEl = document.querySelector(".timer");
-    secondsLeft = 60;
-    
-    function setTime() {
-        var timerInterval = setInterval(function () {
-            secondsLeft--;
-            timeClassEl.textContent = "Time: " + secondsLeft + " seconds left"
-
-            if(secondsLeft === 0) {
-                clearInterval(timerInterval);
-            }
-        }, 1000);
-    }
 
     setTime();
 
@@ -163,8 +180,8 @@ beginButton.addEventListener("click", function(event){
 function secondQuestion () {
     console.log("2 called");
     var optionsButton1Var = document.getElementsByClassName("optionButton1");
-    console.log(optionsButton1Var);
-        console.log("inside for loop");
+    console.log(optionsButton1Var, optionsButton1Var.length);
+        console.log("inside secondQuestion");
         firstQuestionDivText.textContent = "The condition in an if/else statement is enclosed with a:"; 
         optionOneText.textContent = "1. Quotes";
         optionOne.classList.replace("optionButton1","optionButton2");
