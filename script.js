@@ -19,9 +19,6 @@ var arrayOfFunctions = [
 ]
 var keepTrack = 0;
 
-//1. reset all wrongAnswer eventListeners
-//2. when wrong answer is clicked, subtract ten seconds and move on to the next question
-//3. when right answer is clicked, move to the next question
 function wrongAnswerClicked() {
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
@@ -48,40 +45,37 @@ function wrongAnswerClicked2() {
 function wrongAnswerClicked3() {
     resetListener();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
-    if (wrongAnswer.length > 0) {
-        for (var x = 0; x < wrongAnswer.length; x++) {
-        wrongAnswer[x].addEventListener("click", subtractTenSeconds, {once : true});
-        fourthQuestion();
-        } 
-    } else {
-        fourthQuestion();
-    };
+    rightAnswer = document.querySelector(".right-answer");
+    console.log("wrong answer clicked is called3", wrongAnswer, rightAnswer);
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].addEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].addEventListener("click", fourthQuestion);
+    }; 
+    rightAnswer.addEventListener("click", fourthQuestion);
 }
 
 function wrongAnswerClicked4() {
     resetListener();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
-    if (wrongAnswer.length > 0) {
-        for (var x = 0; x < wrongAnswer.length; x++) {
-        wrongAnswer[x].addEventListener("click", subtractTenSeconds, {once : true});
-        fifthQuestion();
-        } 
-    } else {
-        fifthQuestion();
-    };
+    rightAnswer = document.querySelector(".right-answer");
+    console.log("wrong answer clicked is called4", wrongAnswer, rightAnswer);
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].addEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].addEventListener("click", fifthQuestion);
+    }; 
+    rightAnswer.addEventListener("click", fifthQuestion);
 }
 
 function wrongAnswerClicked5() {
     resetListener();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
-    if (wrongAnswer.length > 0) {
-        for (var x = 0; x < wrongAnswer.length; x++) {
-        wrongAnswer[x].addEventListener("click", subtractTenSeconds, {once : true});
-        return;
-        } 
-    } else {
-        return;
-    };
+    rightAnswer = document.querySelector(".right-answer");
+    console.log("wrong answer clicked is called5", wrongAnswer, rightAnswer);
+    for (var x = 0; x < wrongAnswer.length; x++) {
+        wrongAnswer[x].addEventListener("click", subtractTenSeconds);
+        wrongAnswer[x].addEventListener("click", fifthQuestion);
+    }; 
+    rightAnswer.addEventListener("click", fifthQuestion);
 }
 
 function togglePages () {
@@ -166,19 +160,11 @@ beginButton.addEventListener("click", function(event){
     wrongAnswerClicked();
 });
 
-//0. reset eventListener
-//1. change the prompt and options to new text
-//2. change class to wrong or right if need be
-//3. when wrong answer is clicked, subtract ten seconds and move on to the next question
-//4. when right answer is clicked, move to the next question
 function secondQuestion () {
     console.log("2 called");
     var optionsButton1Var = document.getElementsByClassName("optionButton1");
     console.log(optionsButton1Var);
-    for (var i = 0; i < optionsButton1Var.length; i++) {
         console.log("inside for loop");
-        optionsButton1Var[i].addEventListener("click", function(event){
-        event.preventDefault();
         firstQuestionDivText.textContent = "The condition in an if/else statement is enclosed with a:"; 
         optionOneText.textContent = "1. Quotes";
         optionOne.classList.replace("optionButton1","optionButton2");
@@ -188,16 +174,14 @@ function secondQuestion () {
         optionThree.classList.replace("optionButton1","optionButton2");
         optionFourText.textContent = "4. Square Brackets";
         optionFour.classList.replace("optionButton1","optionButton2");
-})}wrongAnswerClicked2();
+        wrongAnswerClicked2();
 };
+
 
 function thirdQuestion () {   
     console.log("3 called");
         var optionsButton2Var = document.getElementsByClassName("optionButton2");
-        for (var o = 0; o < optionsButton2Var.length; o++) {
-            wrongAnswer = document.querySelectorAll(".wrong-answer");
-            optionsButton2Var[o].addEventListener("click", function(event){
-            event.preventDefault();
+        console.log(optionsButton2Var);
             firstQuestionDivText.textContent = "Arrays in JavaScript can be used to store:";
             optionOneText.textContent = "1. Numbers and Strings";
             optionOne.classList.replace("optionButton2","optionButton3");
@@ -209,16 +193,13 @@ function thirdQuestion () {
             optionFourText.textContent = "4. All of the above";
             optionFour.classList.replace("optionButton2","optionButton3");
             optionFour.classList.replace("wrong-answer", "right-answer");
-
             wrongAnswerClicked3();
-})}};
+};
 
 function fourthQuestion () {
     console.log("4 called");
             var optionsButton3Var = document.getElementsByClassName("optionButton3");
-            for (var u = 0; u < optionsButton3Var.length; u++) {
-                optionsButton3Var[u].addEventListener("click", function(event){
-                event.preventDefault();
+            console.log(optionsButton3Var);
                 firstQuestionDivText.textContent = "String values must be enclosed within **answer** when being assigned to variables.";
                 optionOneText.textContent = "1. Commas";
                 optionOne.classList.replace("optionButton3","optionButton4");
@@ -232,14 +213,12 @@ function fourthQuestion () {
                 optionFour.classList.replace("right-answer","wrong-answer");
 
                 wrongAnswerClicked4();
-})}};
+};
 
 function fifthQuestion () {
     console.log("5 called");
                 var optionsButton4Var = document.getElementsByClassName("optionButton4");
-                for (var y = 0; y < optionsButton4Var.length; y++) {
-                    optionsButton4Var[y].addEventListener("click", function(event){
-                    event.preventDefault();
+                console.log(optionsButton4Var);
                     firstQuestionDivText.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
                     optionOneText.textContent = "1. Javascript";
                     optionOne.classList.replace("optionButton4","optionButton5");
@@ -253,4 +232,4 @@ function fifthQuestion () {
                     optionFour.classList.replace("wrong-answer", "right-answer");
 
                     wrongAnswerClicked5();
-})}};        
+};        
