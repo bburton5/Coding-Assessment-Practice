@@ -261,5 +261,19 @@ function gameOver () {
     var removeAnswerOptions = document.querySelectorAll(".optionButton5");
     for (var i = 0; i < removeAnswerOptions.length; i++) {
         removeAnswerOptions[i].remove();
-    }
+    };
+
+    var userInitials = prompt("Please enter your initials to save your score.");
+    var userInfo = {
+        initials: userInitials,
+        score: finalScore,
+    };
+
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+    if (userInitials !=null) {
+        console.log(localStorage.userInfo);
+        var retrievedInfo = JSON.parse(localStorage.getItem("userInfo"));
+        firstQuestionDivText.textContent = "Testing:" + retrievedInfo;
+    };
 };
