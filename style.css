@@ -58,6 +58,7 @@
     background-color: rgb(177, 102, 177);
 }
 
+/* Adds styling for multiple choice options */
 .optionButton1, .optionButton2, .optionButton3, .optionButton4, .optionButton5 {
     width: 200px;
     text-align: left;
@@ -68,6 +69,7 @@
     border-style: none;
 }
 
+/* Adds styling for when person hovers over multiple choice options */
 .optionButton1:hover, .optionButton2:hover, .optionButton3:hover, 
 .optionButton4:hover, .optionButton5:hover {
     background-color: rgb(177, 102, 177);

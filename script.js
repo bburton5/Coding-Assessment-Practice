@@ -13,6 +13,7 @@ var optionFour = document.createElement("button");
 var secondsLeft = 60;
 var timerInterval;
 
+// wrongAnswerClicked - wrongAnswerClicked5 Selects what is wrong/right answer and executes the appropriate function
 function wrongAnswerClicked() {
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
@@ -74,7 +75,7 @@ function wrongAnswerClicked5() {
     rightAnswer.addEventListener("click", gameOver);
 }
 
-
+// resetListener - resetListener4 Removes the event listener for each answer option when new page is entered
 function resetListener () {
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
@@ -113,6 +114,7 @@ function resetListener4 () {
 
 var timeClassEl = document.querySelector(".timer");
 
+// Sets the timer
 function setTime() {
         timerInterval = setInterval(function () {
         secondsLeft--;
@@ -131,6 +133,7 @@ function subtractTenSeconds () {
     console.log(secondsLeft);
 }
 
+// function for when begin button is pressed
 beginButton.addEventListener("click", function(event){
     event.preventDefault();
 
@@ -146,12 +149,13 @@ beginButton.addEventListener("click", function(event){
     var firstQuestionDiv = document.createElement("div");
     firstQuestionDiv.classList.add("questionPrompt");
 
+    // creates the first question
     firstQuestionDivText = document.createTextNode("Commonly used data types DO NOT include:");
 
     firstQuestionDiv.appendChild(firstQuestionDivText);
     questionsParent.appendChild(firstQuestionDiv);
 
-
+    // creates answer options
     optionOne = document.createElement("button");
     optionOne.classList.add("optionButton1", "wrong-answer");
     optionOneText = document.createTextNode("1. Strings");
@@ -179,6 +183,7 @@ beginButton.addEventListener("click", function(event){
     wrongAnswerClicked();
 });
 
+// executes the second question
 function secondQuestion () {
     console.log("2 called");
     var optionsButton1Var = document.getElementsByClassName("optionButton1");
@@ -196,7 +201,7 @@ function secondQuestion () {
         wrongAnswerClicked2();
 };
 
-
+// executes the third question
 function thirdQuestion () {   
     console.log("3 called");
         var optionsButton2Var = document.getElementsByClassName("optionButton2");
@@ -215,6 +220,7 @@ function thirdQuestion () {
             wrongAnswerClicked3();
 };
 
+// execute the fourth question
 function fourthQuestion () {
     console.log("4 called");
             var optionsButton3Var = document.getElementsByClassName("optionButton3");
@@ -234,6 +240,7 @@ function fourthQuestion () {
                 wrongAnswerClicked4();
 };
 
+// execeutes the fifth question
 function fifthQuestion () {
     console.log("5 called");
                 var optionsButton4Var = document.getElementsByClassName("optionButton4");
@@ -253,6 +260,7 @@ function fifthQuestion () {
                     wrongAnswerClicked5();
 };
 
+// ends game and allows user to store their score into local storage
 function gameOver () {
     clearInterval(timerInterval);
     var finalScore = secondsLeft;
