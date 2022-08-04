@@ -12,12 +12,12 @@ var optionFourText = document.createTextNode("4. Numbers");
 var optionFour = document.createElement("button");
 var secondsLeft = 60;
 var timerInterval;
+var firstQuestionDiv;
 
 // wrongAnswerClicked - wrongAnswerClicked5 Selects what is wrong/right answer and executes the appropriate function
 function wrongAnswerClicked() {
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
-    console.log("wrong answer clicked is called1");
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", secondQuestion);
@@ -29,12 +29,10 @@ function wrongAnswerClicked2() {
     resetListener();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
-    console.log("wrong answer clicked is called2", wrongAnswer, rightAnswer);
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", thirdQuestion);
     }; 
-    console.log(secondsLeft);
     rightAnswer.addEventListener("click", thirdQuestion);
 }; 
 
@@ -42,12 +40,10 @@ function wrongAnswerClicked3() {
     resetListener2();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
-    console.log("wrong answer clicked is called3", wrongAnswer, rightAnswer);
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", fourthQuestion);
     }; 
-    console.log(secondsLeft);
     rightAnswer.addEventListener("click", fourthQuestion);
 }
 
@@ -55,7 +51,6 @@ function wrongAnswerClicked4() {
     resetListener3();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
-    console.log("wrong answer clicked is called4", wrongAnswer, rightAnswer);
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", fifthQuestion);
@@ -67,7 +62,6 @@ function wrongAnswerClicked5() {
     resetListener4();
     wrongAnswer = document.querySelectorAll(".wrong-answer");
     rightAnswer = document.querySelector(".right-answer");
-    console.log("wrong answer clicked is called5", wrongAnswer, rightAnswer);
     for (var x = 0; x < wrongAnswer.length; x++) {
         wrongAnswer[x].addEventListener("click", subtractTenSeconds);
         wrongAnswer[x].addEventListener("click", gameOver);
@@ -82,7 +76,6 @@ function resetListener () {
         wrongAnswer[x].removeEventListener("click", secondQuestion);
     };
     rightAnswer.removeEventListener("click", secondQuestion);
-    console.log("reset");   
 }
 
 function resetListener2 () {
@@ -90,8 +83,7 @@ function resetListener2 () {
         wrongAnswer[x].removeEventListener("click", subtractTenSeconds);
         wrongAnswer[x].removeEventListener("click", thirdQuestion);
     };
-    rightAnswer.removeEventListener("click", thirdQuestion);
-    console.log("reset");   
+    rightAnswer.removeEventListener("click", thirdQuestion); 
 }
 
 function resetListener3 () {
@@ -100,7 +92,6 @@ function resetListener3 () {
         wrongAnswer[x].removeEventListener("click", fourthQuestion);
     };
     rightAnswer.removeEventListener("click", fourthQuestion);
-    console.log("reset");   
 }
 
 function resetListener4 () {
@@ -109,7 +100,6 @@ function resetListener4 () {
         wrongAnswer[x].removeEventListener("click", fifthQuestion);
     };
     rightAnswer.removeEventListener("click", fifthQuestion);
-    console.log("reset");   
 }
 
 var timeClassEl = document.querySelector(".timer");
@@ -128,9 +118,7 @@ function setTime() {
 };
 
 function subtractTenSeconds () {
-    console.log("subtr");
     secondsLeft = secondsLeft - 10;
-    console.log(secondsLeft);
 }
 
 // function for when begin button is pressed
@@ -146,7 +134,7 @@ beginButton.addEventListener("click", function(event){
 
     var questionsParent = document.getElementById("main-body-sub");
     
-    var firstQuestionDiv = document.createElement("div");
+    firstQuestionDiv = document.createElement("div");
     firstQuestionDiv.classList.add("questionPrompt");
 
     // creates the first question
@@ -185,10 +173,7 @@ beginButton.addEventListener("click", function(event){
 
 // executes the second question
 function secondQuestion () {
-    console.log("2 called");
     var optionsButton1Var = document.getElementsByClassName("optionButton1");
-    console.log(optionsButton1Var, optionsButton1Var.length);
-        console.log("inside secondQuestion");
         firstQuestionDivText.textContent = "The condition in an if/else statement is enclosed with a:"; 
         optionOneText.textContent = "1. Quotes";
         optionOne.classList.replace("optionButton1","optionButton2");
@@ -203,9 +188,7 @@ function secondQuestion () {
 
 // executes the third question
 function thirdQuestion () {   
-    console.log("3 called");
         var optionsButton2Var = document.getElementsByClassName("optionButton2");
-        console.log(optionsButton2Var);
             firstQuestionDivText.textContent = "Arrays in JavaScript can be used to store:";
             optionOneText.textContent = "1. Numbers and Strings";
             optionOne.classList.replace("optionButton2","optionButton3");
@@ -222,9 +205,7 @@ function thirdQuestion () {
 
 // execute the fourth question
 function fourthQuestion () {
-    console.log("4 called");
             var optionsButton3Var = document.getElementsByClassName("optionButton3");
-            console.log(optionsButton3Var);
                 firstQuestionDivText.textContent = "String values must be enclosed within **answer** when being assigned to variables.";
                 optionOneText.textContent = "1. Commas";
                 optionOne.classList.replace("optionButton3","optionButton4");
@@ -242,9 +223,7 @@ function fourthQuestion () {
 
 // execeutes the fifth question
 function fifthQuestion () {
-    console.log("5 called");
                 var optionsButton4Var = document.getElementsByClassName("optionButton4");
-                console.log(optionsButton4Var);
                     firstQuestionDivText.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
                     optionOneText.textContent = "1. Javascript";
                     optionOne.classList.replace("optionButton4","optionButton5");
@@ -271,17 +250,24 @@ function gameOver () {
         removeAnswerOptions[i].remove();
     };
 
+
+
+
     var userInitials = prompt("Please enter your initials to save your score.");
-    var userInfo = {
-        initials: userInitials,
-        score: finalScore,
-    };
-
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-
     if (userInitials !=null) {
-        console.log(localStorage.userInfo);
-        var retrievedInfo = JSON.parse(localStorage.getItem("userInfo"));
-        firstQuestionDivText.textContent = "Testing:" + retrievedInfo;
+        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+        var scores = {
+            initials: userInitials,
+            score: finalScore,
+        };
+    
+        highScores.push(scores);
+        console.log(highScores);
+        highScores.sort((a,b) => (b.score - a.score)); 
+        highScores.splice(5);
+    
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        firstQuestionDivText.textContent = "High Scores:" + JSON.stringify(highScores);
     };
 };
