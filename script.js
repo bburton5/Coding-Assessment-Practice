@@ -253,21 +253,29 @@ function gameOver () {
 
 
 
-    var userInitials = prompt("Please enter your initials to save your score.");
-    if (userInitials !=null) {
+    var username = prompt("Please enter your name to save your score.");
+    if (username !=null) {
         var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
         var scores = {
-            initials: userInitials,
+            initials: username,
             score: finalScore,
         };
     
         highScores.push(scores);
         console.log(highScores);
         highScores.sort((a,b) => (b.score - a.score)); 
-        highScores.splice(5);
+        // highScores.splice(5);
     
         localStorage.setItem("highScores", JSON.stringify(highScores));
-        firstQuestionDivText.textContent = "High Scores:" + JSON.stringify(highScores);
+        firstQuestionDivText.textContent = "High Scores:";
+        var listofHighScores = document.createElement("ul");
+        for (var i = 0; i<highScores.length; i++) {
+            console.log (`${highScores[i].initials} ${highScores[i].score}`);
+        var listofHighScoresText = document.createElement('li');
+        listofHighScoresText.textContent = `${highScores[i].initials} ${highScores[i].score}`;
+        listofHighScores.appendChild(listofHighScoresText);
+        firstQuestionDiv.appendChild(listofHighScores);
+        };
     };
 };
